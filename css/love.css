@@ -1,0 +1,142 @@
+:root {
+    --unit-size: 40px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Fundo com gradiente suave */
+    background: radial-gradient(ellipse at center, #FFEFD5 0%, #FAEBD7 100%);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* --- BOTÃO DE MUDO --- */
+#mute-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1002;
+    user-select: none;
+}
+
+/* --- ANIMAÇÕES E ELEMENTOS --- */
+.body_left {
+    width: 300px;
+    height: auto;
+    position: absolute;
+    left: 10px;
+    bottom: 110px;
+    z-index: 98;
+}
+
+.body_left img {
+    width: 100%;
+    height: auto;
+}
+
+.container .love {
+    width: calc(13 * var(--unit-size));
+    height: calc(11 * var(--unit-size));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.love .block {
+    right: 0;
+    position: absolute;
+    visibility: hidden;
+    /* Animação de surgimento */
+    animation: appear 0.4s ease-out forwards;
+}
+
+.love .block div {
+    width: var(--unit-size);
+    height: var(--unit-size);
+    position: absolute;
+    background: url("../images/heart.png") no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+/* --- ESTILOS DAS PÉTALAS --- */
+#petal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.petal {
+    position: absolute;
+    top: -10%;
+    width: 20px;
+    height: 25px;
+    background: linear-gradient(to bottom, rgba(255, 182, 193, 0.9), rgba(255, 230, 235, 0.8));
+    border-radius: 150% 0% 150% 0%;
+    pointer-events: none;
+    animation: fall-and-sway linear infinite;
+}
+
+/* --- ESTILOS DA EXPLOSÃO --- */
+.explosion-particle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #c40908;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+/* --- KEYFRAMES (ANIMAÇÕES) --- */
+
+@keyframes fall-and-sway {
+    0% { transform: translateY(0) translateX(0) rotate3d(0, 0, 1, 0deg); opacity: 1; }
+    25% { transform: translateY(30vh) translateX(50px) rotate3d(1, 1, 0, 60deg); }
+    50% { transform: translateY(60vh) translateX(-80px) rotate3d(0, 1, 1, 120deg); }
+    75% { transform: translateY(90vh) translateX(30px) rotate3d(1, 0, 1, 180deg); }
+    100% { transform: translateY(120vh) translateX(-20px) rotate3d(0, 0, 1, 220deg); opacity: 0; }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    :root { --unit-size: 25px; }
+    .body_left { width: 150px; bottom: 80px; }
+}
+
+@media (max-width: 480px) {
+    :root { --unit-size: 20px; }
+    .body_left { width: 100px; }
+}
